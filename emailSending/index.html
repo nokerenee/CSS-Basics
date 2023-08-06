@@ -10,26 +10,31 @@
     crossorigin="anonymous"
   />
     <script type="text/javascript">
-    async function sendEmail() {
-        //nrkelly57@gmail.com
-        //959E4645D1D4A7C669A052C6BA67666735D9
-        const feedback = await Email.send({
+        const SecureToken = '959E4645D1D4A7C669A052C6BA67666735D9';
+        const From = 'nrkelly57@gmail.com';
+    async function sendEmail(To, Subject, Body) {
+        // kingsley.huang@institutedata.com
+        await Email.send({
         Host : "smtp.elasticemail.com",
-        Username : "nrkelly57@gmail.com",
-        Password : "959E4645D1D4A7C669A052C6BA67666735D9",
-        To : "kingsley.huang@institutedata.com",
+        SecureToken : "959E4645D1D4A7C669A052C6BA67666735D9",
+        To : email,
         From : "nrkelly57@gmail.com",
-        Subject : "This is the subject",
-        Body : "And this is the body"
+        Subject : "Confirmed",
+        Body : "Thanks for sending us an email."
     });
-    console.log(feedback);
 }
     function onSubmit(e) {
         e.preventDefault();
-        const formData = new FormData(e.target).entries();
-        console.log ('formData', formData);
-        const data = Object.fromEntries(formData);
-        console.log('Object', data);
+        console.log(
+            "document.getElementById('#email')",
+            document.getElementById('email').value
+        );
+        const email = document.getELementById('email').value;
+        const title = document.getElementById('title').value;
+        const body = document.getElementById('body').value;
+        // const formData = new FormData(e.target).entries();
+        // const data = Object.fromEntries(formData);
+        // console.log('Object', data);
     }
     </script>
   </head>
@@ -48,13 +53,16 @@
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" name="Password" class="form-control" id="exampleInputPassword1"/>
+                        <label for="exampleInputTitle1" class="form-label">Title</label>
+                        <input type="title" name="title" class="form-control" id="exampleInputTitle1"/>
                     </div>
-                    <div class="mb-3 form-check">
+                    <label for="body" class="form-label">Message</label>
+                    <textarea name="body" class="form-control"></textarea>
+        
+                    <!-- <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
+                    </div>-->
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
